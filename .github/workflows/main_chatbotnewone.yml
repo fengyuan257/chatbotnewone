@@ -17,17 +17,21 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
-      
-      - name: Install dependencies and build
-        run: |
-          npm install
-          npm run build --if-present
-      
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the frontend
+        run: npm run build:frontend
+
+      - name: List build directory (debugging step)
+        run: ls -al frontend/build
+
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
         with:
           name: node-app
-          path: build/
+          path: frontend/build/
 
   deploy:
     runs-on: ubuntu-latest
@@ -47,13 +51,13 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_859B6370316B455BA820EA01933A91D0 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_56A7EF26D6634D22AF9E766AD082E79E }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_80ECE7970E644C79872FBC631B27F837 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
           app-name: 'Chatbotnewone'
-          package: build/
+          package: frontend/build/
