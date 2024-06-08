@@ -2,13 +2,27 @@ const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
 const fs = require('fs');
+const path = require('path');
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: "*", // Update this to restrict to your frontend's URL if needed
         methods: ["GET", "POST"]
     }
+});
+
+// Serve static files from the React frontend app
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+// API route to handle other requests (for future API endpoints)
+app.get('/api', (req, res) => {
+    res.send('API is running...');
+});
+
+// All other GET requests not handled before will return the React app
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 });
 
 let intents = {};
