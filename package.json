@@ -8,11 +8,18 @@
     "install:frontend": "cd frontend && npm install",
     "install:backend": "cd backend && npm install",
     "install": "npm run install:frontend && npm run install:backend",
-    "build": "cd backend && npm install  && cd ../frontend && npm install && npm run build",
+    "build:frontend": "cd frontend && npm run build",
+    "build": "npm run build:frontend",
     "start": "node backend/server.js",
     "test": "echo \"No tests specified\""
   },
   "author": "",
   "license": "ISC",
-
+  "dependencies": {
+    "express": "^4.17.1",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
 }
