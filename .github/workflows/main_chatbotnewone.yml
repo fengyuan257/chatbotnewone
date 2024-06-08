@@ -24,16 +24,14 @@ jobs:
       - name: Install serve
         run: npm install -g serve
 
-      - name: Serve build folder
-        run: serve -s build
-
-
       - name: npm install, build, and test
         run: |
           npm install
           npm run build --if-present
           npm run test --if-present
-      
+      - name: Serve build folder
+        run: serve -s build
+        
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
