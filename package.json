@@ -15,10 +15,5 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    // List your dependencies here
-  },
-  "devDependencies": {
-    // List your devDependencies here
-  }
+
 }
