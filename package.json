@@ -1,14 +1,24 @@
 {
   "name": "chatbotnewone",
   "version": "1.0.0",
-  "description": "## Lessons",
-  "homepage": "https://chatbotnewone.azurewebsites.net/", 
-  "main": "index.js",
+  "description": "Chatbot New One Project",
+  "homepage": "https://chatbotnewone.azurewebsites.net/",
+  "main": "backend/server.js",
   "scripts": {
-    "build": "cd backend && npm install  && cd ../frontend && npm install && npm run build",
+    "install:frontend": "cd frontend && npm install",
+    "install:backend": "cd backend && npm install",
+    "install": "npm run install:frontend && npm run install:backend",
+    "build:frontend": "cd frontend && npm run build",
+    "build": "npm run build:frontend",
     "start": "node backend/server.js",
     "test": "echo \"No tests specified\""
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    // List your dependencies here
+  },
+  "devDependencies": {
+    // List your devDependencies here
+  }
 }
